@@ -8,17 +8,31 @@ Or one can make risky bets in the various games within the casino. Or one can bu
 
 ## Modules to install
 
-mysql.connector  pip install mysql-connector
-matplotlb-       pip install matplotlib
-yfinance-        pip install yfinance
-pandas-          pip install pandas
-
+mysql.connector  
+```bash
+pip install mysql-connector
+```
+matplotlb-       
+```bash
+pip install matplotlib
+```
+yfinance-        
+```bash
+pip install yfinance
+```
+pandas-          
+```bash
+pip install pandas
+```
 
 ## Changelog 
 
 Dec 2019- Created casino with random module including slot machine, tossing game, blackjack etc.
+
 Jun 2020- Created python bank with mysql-connector to store bank information on individual accounts
+
 Jul 2020- Added stock market trading with yfinance, password strength checking with re module and  email verification system using smtplib
+
 Aug 2020- Code is debugged and made error-proof using try & except blocks.
 
 
