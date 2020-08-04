@@ -64,6 +64,7 @@ while True:
             amount=int(input("Enter amount: "))
             methods.update(account,amount)
             k=methods.money(account)
+            print(amount,"added to account.")
         except:
             print("Invalid account details")
         print()
@@ -75,6 +76,7 @@ while True:
             k=methods.money(acc1)
             k=methods.money(acc2)
             methods.transfer(acc1,acc2,amount)
+            print(amount,"transferred from",acc1,"to",acc2)
         except:
             print("Invalid account details")
         print()
@@ -84,6 +86,7 @@ while True:
             password=input("Enter password: ")
             k=methods.balance(account,password)[1]
             methods.del_account(account,password)
+            print("Account deleted")
         except:
             print("Invalid account details")
         print()
