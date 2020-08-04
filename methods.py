@@ -38,7 +38,6 @@ def transfer(acc1,acc2,amount):
   C.execute("update account set balance=balance-"+str(amount)+" where acc_name=\'"+str(acc1)+"\'")
   C.execute("update account set balance=balance+"+str(amount)+" where acc_name=\'"+str(acc2)+"\'")
   mydb.commit()
-  print(str(amount)+" transferred")
 
 def del_account(account_name,password):
   C.execute("delete from account where acc_name='"+str(account_name)+"' and password='"+str(password)+"'")
