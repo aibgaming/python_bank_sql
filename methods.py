@@ -5,10 +5,10 @@ from email.mime.text import MIMEText
 import mysql.connector as my
 
 try:
-  mydb=my.connect(host='localhost',user='root',database='python_bank',password="gDe9h^27")
+  mydb=my.connect(host='localhost',user='root',database='python_bank',password="password")
   C=mydb.cursor()
 except:
-  mydb=my.connect(host='localhost',user='root',password="gDe9h^27")
+  mydb=my.connect(host='localhost',user='root',password="password")
   C=mydb.cursor()
   C.execute("create database python_bank")
   C.execute("create table python_bank.account(acc_name varchar(25),balance integer(100),password varchar(25),email varchar(25))")
