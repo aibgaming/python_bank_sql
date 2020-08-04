@@ -222,12 +222,15 @@ while True:
             elif choice==5:
                 L = ['Spades','Clubs','Diamonds','Hearts']
                 D = {2:2,3:3,4:4,5:5,6:6,7:7,8:8,9:9,10:10,'Ace':11,'King':10,'Queen':10,'Jack':10}
-                L1= []*21
+                
                 while True:
+                    L1= []
+                    L1= []*21
                     bet = int(input("How much do you want to bet?"))
                     if bet > methods.money(account):
                         print("You don't have enough money")
                         continue
+                    compvalue = 0
                     methods.update(account,-bet)
                     profit = 0
                     v=random.randint(1,13)
@@ -291,10 +294,11 @@ while True:
                                     value -=10
                                     a = 1
                                     L1.remove(i)
-                                    print("Value of Ace became 1")
-                                    break
+                                    print("Value of Ace became 1. New Value is = ", value)
+                                    
+                                    
                             if a == 1:
-                                continue
+                                pass
                             elif a == 0:
                                 print("Your final Value is",value)
                                 print("House Value is",compvalue)
@@ -313,21 +317,37 @@ while True:
                             profit += 3*bet
                             break
                         elif compvalue == 21 and value !=21:
-                            print("Your final Value is",value)
-                            print("House Value is",compvalue)
-                            print("Blackjack. House wins")
+                            a = 0
+                            for i in L1:
+                                if i == "Ace":
+                                    value -=10
+                                    a = 1
+                                    L1.remove(i)
+                                    print("Value of Ace became 1. New Value is = ", value)
+                                    
+                            if value == 21:
+                                print("Your final Value is",value)
+                                print("House Value is",compvalue)
+                                print("You Draw")
+                                profit = bet
+                                break
+                            elif value != 21:
+                                print("Your final Value is",value)
+                                print("House Value is",compvalue)
+                                print("Blackjack. House wins")
                             break
                         elif compvalue >21 and value>21:
                             a = 0
                             for i in L1:
                                 if i == "Ace":
-                                    value = value -10
+                                    value -=10
                                     a = 1
-                                    print(value)
                                     L1.remove(i)
+                                    print("Value of Ace became 1. New Value is = ", value)
                                     break
                             if a == 1:
                                 print("Your final Value is", value)
+                                print("House Value is",compvalue)
                                 print("You Win")
                                 profit += 2*bet
                                 break
@@ -336,18 +356,24 @@ while True:
                             print("You Draw")
                             profit = bet
                             break
-                        if p == 9 and f ==1:
-                            if value > compvalue:
-                                print("Your final Value is",value)
-                                print("House Value is",compvalue)
-                                print("You win")
-                                profit += 2*bet
-                                break
-                            elif compvalue> value:
-                                print("Your final Value is",value)
-                                print("House Value is",compvalue)
-                                print("House wins")
-                                break
+                        
+                        elif value > compvalue and f== 1 and p==9:
+                            print("Your final Value is",value)
+                            print("House Value is",compvalue)
+                            print("You win")
+                            profit += 2*bet
+                            break
+                        elif compvalue> value and f== 1 and p==9:
+                            print("Your final Value is",value)
+                            print("House Value is",compvalue)
+                            print("House wins")
+                            break
+                        elif compvalue == value and f== 1 and p==9:
+                            print("Your final Value is",value)
+                            print("House Value is",compvalue)
+                            print("You Draw")
+                            profit = bet
+                            break
                     methods.update(account,profit)
                     print("You have", methods.money(account),"money left.")
                     d= input("Do you want to continue.Yes or No only.")
@@ -391,6 +417,8 @@ while True:
                 DL=csv.reader(F)
                 next(DL)
                 for i in DL:
+                    if i[2]=='':
+                        continue
                     initial=i[2]
                     print("You bought",shares,"shares of",stock,'for',i[2],"per share.")
                     print("1 month later")
