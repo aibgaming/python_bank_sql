@@ -24,6 +24,10 @@ pandas-
 ```bash
 pip install pandas
 ```
+pygame-          
+```bash
+pip install pygame
+```
 
 ## Changelog 
 
