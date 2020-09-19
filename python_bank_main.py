@@ -158,14 +158,110 @@ def balance():
     
 
 
+def depositsql():
+  C.execute("update account set balance=balance+"+Deposit_amount.get()+" where acc_name=\'"+Deposit_username.get()+"\'")
+  mydb.commit()
+  messagebox.showinfo("Deposited","You deposited "+Deposit_amount.get()+" AED")
+  de.destroy()
+
+def deposit():
+    global Deposit_username
+    global Deposit_amount
+    global de
+    de = Tk()
+    de.title("Deposit Money")
+    de.geometry("1366x768")
     
-        
+    Label(de, text="Deposit Money", bg="aqua",width=1366, height=10).pack()
+    Label(de, text="").pack()
+    Label(de, text="").pack()
+    Label(de, text="Enter account name: ", bg="turquoise").pack()
+    Label(de, text="").pack()
+    Deposit_username = Entry(de)
+    Deposit_username.pack()
+    Label(de, text="Enter amount to deposit: ", bg="turquoise").pack()
+    Label(de, text="").pack()
+    Deposit_amount = Entry(de)
+    Deposit_amount.pack()
+    Button(de, text="Deposit", width=30, height=5, bg="turquoise", command = depositsql).pack()
+    de.mainloop()
 
-root = Tk()
-root.geometry("1366x768")
 
-Button(root, text="Register your Account", width=30, height=5, bg="red", command = register).pack()
-Button(root, text="Check your Balance", width=30, height=5, bg="red", command = balance).pack()
+def transfersql():
+  C.execute("update account set balance=balance-"+transfer_amount.get()+" where acc_name=\'"+transfer_user1.get()+"\'")
+  C.execute("update account set balance=balance+"+transfer_amount.get()+" where acc_name=\'"+transfer_user2.get()+"\'")
+  mydb.commit()
+  messagebox.showinfo("Transfered","You transferred "+transfer_amount.get()+" AED from "+transfer_user1.get()+" to "+transfer_user2.get())
+  tr.destroy()
 
-Label(root, text="").pack()
-root.mainloop()
+def transfer():
+    global transfer_user1
+    global transfer_user2
+    global transfer_amount
+    global tr
+    tr = Tk()
+    tr.title("Transfer Money")
+    tr.geometry("1366x768")
+    
+    Label(tr, text="Transfer Money", bg="aqua",width=1366, height=10).pack()
+    Label(tr, text="").pack()
+    Label(tr, text="").pack()
+    Label(tr, text="Enter account name of sender: ", bg="turquoise").pack()
+    Label(tr, text="").pack()
+    transfer_user1 = Entry(tr)
+    transfer_user1.pack()
+    Label(tr, text="Enter account name of receiver: ", bg="turquoise").pack()
+    Label(tr, text="").pack()
+    transfer_user2 = Entry(tr)
+    transfer_user2.pack()
+    Label(tr, text="Enter amount to transfer: ", bg="turquoise").pack()
+    Label(tr, text="").pack()
+    transfer_amount = Entry(tr)
+    transfer_amount.pack()
+    Button(tr, text="Transfer", width=30, height=5, bg="turquoise", command = transfersql).pack()
+    tr.mainloop()
+
+def deletesql():
+  C.execute("delete from account where acc_name='"+delete_username.get()+"' and password='"+delete_password.get()+"'")
+  mydb.commit()
+  messagebox.showinfo("Deleted","You deleted your account!")
+  dele.destroy()
+
+def delete():
+    global delete_username
+    global delete_password
+    global dele
+    dele = Tk()
+    dele.title("Delete")
+    dele.geometry("1366x768")
+    Label(dele, text="Delete Account", bg="aqua",width=1366, height=10).pack()
+    Label(dele, text="").pack()
+    Label(dele, text="").pack()
+    Label(dele, text="Enter account name: ", bg="turquoise").pack()
+    Label(dele, text="").pack()
+    delete_username = Entry(dele)
+    delete_username.pack()
+    Label(dele, text="Enter password: ", bg="turquoise").pack()
+    Label(dele, text="").pack()
+    delete_password = Entry(dele)
+    delete_password.pack()
+    Button(dele, text="Delete", width=30, height=5, bg="turquoise", command = deletesql).pack()
+    dele.mainloop()
+
+
+def Bank():
+  root = Tk()
+  root.geometry("1366x768")
+
+  Button(root, text="Register your Account", width=30, height=5, bg="red", command = register).pack()
+  Button(root, text="Check your Balance", width=30, height=5, bg="red", command = balance).pack()
+  Button(root, text="Deposit Money", width=30, height=5, bg="red", command = deposit).pack()
+  Button(root, text="Transfer Money", width=30, height=5, bg="red", command = transfer).pack()
+  Button(root, text="Delete Account", width=30, height=5, bg="red", command = delete).pack()
+
+  Label(root, text="").pack()
+  root.mainloop()
+
+
+Bank()
+
